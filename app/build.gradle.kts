@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.todokanai.messagetest"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.todokanai.messagetest"
@@ -49,9 +49,8 @@ android {
 
 dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
-    implementation(libs.firebase.messaging.ktx)
-    implementation(libs.androidx.work.runtime.ktx)
-    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.common.ktx)
+    implementation(libs.firebase.database.ktx)
     val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
     val roomVersion = "2.6.1"
     val glideVersion = "4.13.0"
@@ -95,7 +94,4 @@ dependencies {
     kapt ("com.google.dagger:hilt-android-compiler:2.44")
     implementation ("androidx.datastore:datastore-preferences:1.1.0-alpha01")       // enable DataStore
 
-    //implementation ("com.google.firebase:firebase-admin:9.2.0")
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
-    implementation("com.google.firebase:firebase-analytics")
 }
