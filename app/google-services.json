@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "352073209626",
+    "project_id": "todokanai-messagetest",
+    "storage_bucket": "todokanai-messagetest.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352073209626:android:62b93eccf74e98d5a9fea3",
+        "android_client_info": {
+          "package_name": "com.todokanai.messagetest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiYVBaimGtfMPo_dKqLddMEjW2NroaWvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
