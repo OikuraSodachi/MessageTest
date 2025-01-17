@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.todokanai.messagetest"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.todokanai.messagetest"
@@ -49,6 +49,9 @@ android {
 
 dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.firebase.firestore.ktx)
     val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
     val roomVersion = "2.6.1"
     val glideVersion = "4.13.0"
