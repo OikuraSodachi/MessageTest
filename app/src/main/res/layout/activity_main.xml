@@ -26,7 +26,7 @@
                 android:id="@+id/inputText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:hint="input" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -48,6 +48,7 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="Button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

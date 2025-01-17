@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
 import com.todokanai.messagetest.Objects.myRef
 import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.databinding.ActivityMainBinding
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.run{
             receivedText.asLiveData().observe(this@MainActivity){
-                binding.recieved.text = it
+                binding.recieved.text = "Message: $it"
             }
         }
         binding.sendBtn.setOnClickListener {
