@@ -1,7 +1,6 @@
 package com.todokanai.messagetest
 
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
+import com.todokanai.messagetest.Objects.myRef
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -12,12 +11,10 @@ class Model {
         get() = _receivedText
 
     fun sendString(value: String) {
-        val database = Firebase.database
-        val myRef = database.getReference("message")
         myRef.setValue(value)
     }
 
-    private fun setReceivedText(value: String){
+    fun setReceivedText(value: String){
         _receivedText.value = value
     }
 }

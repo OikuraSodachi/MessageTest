@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
+import com.todokanai.messagetest.Objects.myRef
+import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.databinding.ActivityMainBinding
 import com.todokanai.messagetest.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         binding.sendBtn.setOnClickListener {
             viewModel.send(binding.inputText.text.toString())
         }
+
+        myRef.addValueEventListener(
+            TestListener(
+                callback = {viewModel.onReceived(it)}
+            )
+        )
 
 
 
