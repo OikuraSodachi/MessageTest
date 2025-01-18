@@ -16,9 +16,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel.run{
+            permission(this@MainActivity)
             receivedText.asLiveData().observe(this@MainActivity){
+                notiTest(it)
                 binding.recieved.text = "Message: $it"
             }
             addValueListener()
