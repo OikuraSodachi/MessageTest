@@ -1,7 +1,9 @@
 package com.todokanai.messagetest.di
 
 import android.content.Context
-import com.todokanai.messagetest.Model
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.todokanai.messagetest.repository.DataStoreRepository
 import dagger.Module
 import dagger.Provides
@@ -22,8 +24,8 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideModel():Model{
-        return Model()
+    fun providesFirebase():FirebaseDatabase{
+        return Firebase.database
     }
 
 }

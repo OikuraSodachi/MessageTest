@@ -1,29 +1,35 @@
 package com.todokanai.messagetest.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.google.firebase.database.DataSnapshot
-import com.todokanai.messagetest.Model
-import com.todokanai.messagetest.interfaces.FcmMessaging
+import com.google.firebase.database.FirebaseDatabase
+import com.todokanai.messagetest.R
+import com.todokanai.messagetest.TestListener
+import com.todokanai.messagetest.di.MyApplication.Companion.appContext
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val model: Model):ViewModel(),FcmMessaging {
+class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
 
-    val receivedText = model.receivedText
+    private val myRef = firebase.getReference(appContext.getString(R.string.firebase_ref))
 
-    fun onReceived(value: DataSnapshot){
-        val temp = value.value.toString()
-        model.setReceivedText(temp)
+    private val _receivedText = MutableStateFlow("no text")
+    val receivedText : StateFlow<String>
+        get() = _receivedText
+
+    fun sendString(value: String) {
+        myRef.setValue(value)
     }
 
-
-    override fun send(value:String) {
-        println("input: $value")
-        model.sendString(value)
-    }
-
-    override fun receive(value: DataSnapshot) {
-        model.setReceivedText(value.value.toString())
+    fun listener(){
+        myRef.addValueEventListener(
+            TestListener(
+                callback = {
+                    _receivedText.value = it.value.toString()
+                }
+            )
+        )
     }
 }

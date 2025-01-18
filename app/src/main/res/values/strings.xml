@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MessageTest</string>
+    <string name="firebase_ref">message</string>
 </resources>

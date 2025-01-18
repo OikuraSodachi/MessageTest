@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
-import com.todokanai.messagetest.Objects.myRef
-import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.databinding.ActivityMainBinding
 import com.todokanai.messagetest.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,18 +21,11 @@ class MainActivity : AppCompatActivity() {
             receivedText.asLiveData().observe(this@MainActivity){
                 binding.recieved.text = "Message: $it"
             }
+            listener()
         }
         binding.sendBtn.setOnClickListener {
-            viewModel.send(binding.inputText.text.toString())
+            viewModel.sendString(binding.inputText.text.toString())
         }
-
-        myRef.addValueEventListener(
-            TestListener(
-                callback = {viewModel.onReceived(it)}
-            )
-        )
-
-
 
         setContentView(binding.root)
     }
