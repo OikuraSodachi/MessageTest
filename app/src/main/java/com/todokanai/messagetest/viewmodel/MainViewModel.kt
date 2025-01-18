@@ -23,7 +23,7 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
         myRef.setValue(value)
     }
 
-    fun listener(){
+    fun addValueListener(){
         myRef.addValueEventListener(
             TestListener(
                 callback = {

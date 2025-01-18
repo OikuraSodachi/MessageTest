@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             receivedText.asLiveData().observe(this@MainActivity){
                 binding.recieved.text = "Message: $it"
             }
-            listener()
+            addValueListener()
         }
         binding.sendBtn.setOnClickListener {
             viewModel.sendString(binding.inputText.text.toString())
