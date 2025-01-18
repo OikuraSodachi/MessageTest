@@ -29,6 +29,4 @@ abstract class BaseNotification(
             .build()
         return result
     }
-
-
 }
