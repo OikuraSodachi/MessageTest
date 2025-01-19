@@ -59,7 +59,6 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
         requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
     }
 
-
     fun requestPermission_td(
         activity: Activity,
         permissions: Array<String>,
