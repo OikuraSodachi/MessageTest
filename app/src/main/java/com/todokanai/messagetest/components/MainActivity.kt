@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.run{
-            viewModel.createNotificationChannel()
             receivedText.asLiveData().observe(this@MainActivity){
                 notiTest(it)
                 binding.recieved.text = "Message: $it"
