@@ -14,6 +14,10 @@ abstract class BaseNotification(
 
     val manager = NotificationManagerCompat.from(context)
 
+    fun createNotificationChannel(){
+        manager.createNotificationChannel(notificationChannel)
+    }
+
     /** @return basic [Notification] instance **/
     open fun basicNotification(
         icon:Int,

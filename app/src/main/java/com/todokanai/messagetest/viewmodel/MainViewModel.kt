@@ -50,8 +50,11 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
         )
     }
 
+    fun createNotificationChannel(){
+        noti.createNotificationChannel()
+    }
+
     fun notiTest(value:String){
-        println("test: $value")
         noti.post(value)
     }
 
