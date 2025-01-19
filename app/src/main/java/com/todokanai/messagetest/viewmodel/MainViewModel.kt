@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import com.todokanai.messagetest.Constants
@@ -11,7 +13,6 @@ import com.todokanai.messagetest.R
 import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
 import com.todokanai.messagetest.notifications.Notifications
-import com.todokanai.messagetest.requestPermission_td
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,7 +29,6 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
                 Constants.CHANNEL_ID,
                 Constants.NOTIFICATION_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
-
             )
         )
 
@@ -51,14 +51,33 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
     }
 
     fun notiTest(value:String){
+        println("test: $value")
         noti.post(value)
     }
 
-    fun permission(activity:Activity){
-        requestPermission_td(
-            activity,
-            permissions = arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-            {}
+    fun test(activity: AppCompatActivity){
+        requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
+    }
+
+
+    fun requestPermission_td(
+        activity: Activity,
+        permissions: Array<String>,
+        permissionNotice:()->Unit,
+        requestCode:Int = 111
+    ){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                activity,
+                permissions.first()
             )
+        ) {
+            permissionNotice()
+        } else {
+            ActivityCompat.requestPermissions(
+                activity,
+                permissions,
+                requestCode
+            )
+        }
     }
 }
