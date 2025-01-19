@@ -10,6 +10,15 @@ class Notifications(
     notificationChannel: NotificationChannel
 ): BaseNotification(context,notificationChannel) {
 
+
+    fun postNotification(contentText: String){
+        post(
+            title = "Title",
+            contentText = contentText,
+            icon = R.drawable.ic_launcher_foreground
+        )
+    }
+    /*
     /** post the notification**/
     fun post(contentText:String){
         val id = 1
@@ -23,4 +32,6 @@ class Notifications(
                 )
         manager.notify(id,noti)
     }
+
+     */
 }

@@ -51,7 +51,7 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
     }
 
     fun notiTest(value:String){
-        noti.post(value)
+        noti.postNotification(value)
     }
 
     fun test(activity: AppCompatActivity){
