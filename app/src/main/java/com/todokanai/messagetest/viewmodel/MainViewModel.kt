@@ -10,6 +10,7 @@ import com.todokanai.messagetest.R
 import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
 import com.todokanai.messagetest.notifications.Notifications
+import com.todokanai.messagetest.requestPermission_td
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,26 +45,5 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase,private val no
 
     fun test(activity: AppCompatActivity){
         requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
-    }
-
-    fun requestPermission_td(
-        activity: Activity,
-        permissions: Array<String>,
-        permissionNotice:()->Unit,
-        requestCode:Int = 111
-    ){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                activity,
-                permissions.first()
-            )
-        ) {
-            permissionNotice()
-        } else {
-            ActivityCompat.requestPermissions(
-                activity,
-                permissions,
-                requestCode
-            )
-        }
     }
 }

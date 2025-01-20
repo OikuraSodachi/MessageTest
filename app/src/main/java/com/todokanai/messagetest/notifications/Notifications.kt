@@ -10,8 +10,8 @@ import com.todokanai.messagetest.abstracts.BaseNotification
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
 
 class Notifications(
-    notificationManager:NotificationManagerCompat
-): BaseNotification(notificationManager) {
+    val notificationManager:NotificationManagerCompat
+): BaseNotification() {
 
     companion object{
 

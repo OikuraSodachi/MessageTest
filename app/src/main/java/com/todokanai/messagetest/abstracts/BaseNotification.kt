@@ -6,12 +6,9 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 
 /** Notification 관리를 위한 class **/
-abstract class BaseNotification(
-    val notificationManager:NotificationManagerCompat
-) {
+abstract class BaseNotification() {
 
     companion object{
 
