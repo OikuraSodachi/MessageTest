@@ -2,7 +2,6 @@ package com.todokanai.messagetest.viewmodel
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
@@ -39,8 +38,8 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase,private val no
         )
     }
 
-    fun notiTest(context: Context, value:String){
-        notifications.postNotification(context,value)
+    fun notiTest(value:String){
+        notifications.postNotification(title = "Title",value)
     }
 
     fun test(activity: AppCompatActivity){

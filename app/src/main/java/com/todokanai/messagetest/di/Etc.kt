@@ -14,7 +14,7 @@ class Etc {
 
     @Singleton
     @Provides
-    fun provideNotifications(notificationManager: NotificationManagerCompat):Notifications{
+    fun provideNotifications(notificationManager: NotificationManagerCompat): Notifications {
         return Notifications(notificationManager)
     }
 }
