@@ -2,13 +2,11 @@ package com.todokanai.messagetest.viewmodel
 
 import android.Manifest
 import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
-import com.todokanai.messagetest.Constants
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
@@ -19,18 +17,9 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
+class MainViewModel @Inject constructor(firebase:FirebaseDatabase,private val notifications: Notifications):ViewModel() {
 
     private val myRef = firebase.getReference(appContext.getString(R.string.firebase_ref))
-    private val noti =
-        Notifications(
-            appContext,
-            NotificationChannel(
-                Constants.CHANNEL_ID,
-                Constants.NOTIFICATION_CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-        )
 
     private val _receivedText = MutableStateFlow("no text")
     val receivedText : StateFlow<String>
@@ -50,8 +39,8 @@ class MainViewModel @Inject constructor(firebase:FirebaseDatabase):ViewModel() {
         )
     }
 
-    fun notiTest(value:String){
-        noti.postNotification(value)
+    fun notiTest(context: Context, value:String){
+        notifications.postNotification(context,value)
     }
 
     fun test(activity: AppCompatActivity){

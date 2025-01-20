@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.run{
             receivedText.asLiveData().observe(this@MainActivity){
-                notiTest(it)
+                notiTest(this@MainActivity,it)
                 binding.recieved.text = "Message: $it"
             }
             addValueListener()
