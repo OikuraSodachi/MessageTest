@@ -1,7 +1,6 @@
 package com.todokanai.messagetest.viewmodel
 
 import android.Manifest
-import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
@@ -32,7 +31,7 @@ class MainViewModel @Inject constructor(
     val receivedText : StateFlow<String>
         get() = _receivedText
 
-    fun sendString(value: String) {
+    fun sendBtn(value: String) {
         myRef.setValue(value)
     }
 
@@ -50,22 +49,22 @@ class MainViewModel @Inject constructor(
         notifications.postNotification(title = "Title",value)
     }
 
-    fun test(activity: AppCompatActivity){
+    fun permission(activity: AppCompatActivity){
         requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
     }
 
-    val importanceList = listOf(
-        NotificationManager.IMPORTANCE_HIGH,
-        NotificationManager.IMPORTANCE_DEFAULT,
-        NotificationManager.IMPORTANCE_LOW,
-        NotificationManager.IMPORTANCE_MIN,
-        NotificationManager.IMPORTANCE_NONE
-        ).reversed()
+    val disableSoundOption = listOf(true,false)
+    val disableNotibarOption =listOf(true,false)
 
-    val importanceFlow = dsRepo.importanceFlow
-    fun importance(importance:Int){
+    fun soundOption(value:Boolean){
         CoroutineScope(Dispatchers.IO).launch {
-            dsRepo.saveImportance(importance)
+            dsRepo.saveDisableSound(value)
+        }
+    }
+
+    fun notibarOption(value: Boolean){
+        CoroutineScope(Dispatchers.IO).launch {
+            dsRepo.saveDisableNotificationBar(value)
         }
     }
 }

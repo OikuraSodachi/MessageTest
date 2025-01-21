@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.run{
+            permission(this@MainActivity)
             receivedText.asLiveData().observe(this@MainActivity){
                 notiTest(it)
                 binding.recieved.text = "Message: $it"
@@ -27,23 +28,29 @@ class MainActivity : AppCompatActivity() {
             addValueListener()
         }
         binding.run{
-            importance.run{
-                val tempAdapter = ArrayAdapter(this@MainActivity,android.R.layout.simple_spinner_dropdown_item,viewModel.importanceList)
+            disableSound.run{
+                val tempAdapter = ArrayAdapter(this@MainActivity,android.R.layout.simple_spinner_dropdown_item,viewModel.disableSoundOption)
                 adapter = tempAdapter
-                onItemSelectedListener = SpinnerListener({ position ->
-                    tempAdapter.getItem(position)?.let{
-                        viewModel.importance(position)
+                onItemSelectedListener = SpinnerListener { position ->
+                    tempAdapter.getItem(position)?.let {
+                        viewModel.soundOption(it)
                     }
-                })
+                }
             }
+            disableNotiBar.run {
+                val tempAdapter = ArrayAdapter(this@MainActivity,android.R.layout.simple_spinner_dropdown_item,viewModel.disableNotibarOption)
+                adapter = tempAdapter
+                onItemSelectedListener = SpinnerListener { position ->
+                    tempAdapter.getItem(position)?.let {
+                        viewModel.notibarOption(it)
+                    }
+                }
+            }
+
             sendBtn.setOnClickListener {
-                viewModel.sendString(binding.inputText.text.toString())
-            }
-            testBtn.setOnClickListener {
-                viewModel.test(this@MainActivity)
+                viewModel.sendBtn(binding.inputText.text.toString())
             }
         }
-
         setContentView(binding.root)
     }
 }
