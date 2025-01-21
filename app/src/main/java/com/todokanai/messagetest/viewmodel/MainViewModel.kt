@@ -1,10 +1,8 @@
 package com.todokanai.messagetest.viewmodel
 
 import android.Manifest
-import android.app.Activity
 import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import com.todokanai.messagetest.R
@@ -67,12 +65,7 @@ class MainViewModel @Inject constructor(
     val importanceFlow = dsRepo.importanceFlow
     fun importance(importance:Int){
         CoroutineScope(Dispatchers.IO).launch {
-            if(importance==0){
-                dsRepo.saveDisableSound(true)
-            }else{
-                dsRepo.saveDisableSound(false)
-            }
-            //dsRepo.saveImportance(importance)
+            dsRepo.saveImportance(importance)
         }
     }
 }
