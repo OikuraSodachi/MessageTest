@@ -65,4 +65,8 @@ abstract class BaseNotification() {
         )
 
     abstract fun builder():NotificationCompat.Builder
+
+    abstract fun disableSound(value:Boolean)
+
+    abstract fun disableNotificationBar(value: Boolean)
 }

@@ -2,6 +2,7 @@ package com.todokanai.messagetest.di
 
 import androidx.core.app.NotificationManagerCompat
 import com.todokanai.messagetest.notifications.Notifications
+import com.todokanai.messagetest.repository.DataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +15,7 @@ class Etc {
 
     @Singleton
     @Provides
-    fun provideNotifications(notificationManager: NotificationManagerCompat): Notifications {
-        return Notifications(notificationManager)
+    fun provideNotifications(notificationManager: NotificationManagerCompat,dataStoreRepository: DataStoreRepository): Notifications {
+        return Notifications(notificationManager,dataStoreRepository)
     }
 }

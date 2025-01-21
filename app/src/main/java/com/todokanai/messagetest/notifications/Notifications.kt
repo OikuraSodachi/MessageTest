@@ -4,13 +4,16 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.asLiveData
 import com.todokanai.messagetest.Constants
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.abstracts.BaseNotification
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
+import com.todokanai.messagetest.repository.DataStoreRepository
 
 class Notifications(
-    val notificationManager:NotificationManagerCompat
+    val notificationManager:NotificationManagerCompat,
+    val dsRepo:DataStoreRepository
 ): BaseNotification() {
 
     companion object{
@@ -64,5 +67,29 @@ class Notifications(
 
     override fun builder(): NotificationCompat.Builder {
         return NotificationCompat.Builder(appContext,defaultChannel.id)
+    }
+
+    val sound = dsRepo.disableSoundFlow.apply {
+        this.asLiveData().observeForever {
+            it?.let {
+                disableSound(it)
+            }
+        }
+    }
+
+    val notiBar = dsRepo.disableNotificationBarFlow.apply {
+        this.asLiveData().observeForever {
+            it?.let {
+                disableNotificationBar(it)
+            }
+        }
+    }
+
+    override fun disableNotificationBar(value: Boolean) {
+        println("disableBar: $value")
+    }
+
+    override fun disableSound(value: Boolean) {
+        println("disableSound: $value")
     }
 }
