@@ -3,6 +3,7 @@ package com.todokanai.messagetest.viewmodel
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.FirebaseDatabase
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.TestListener
@@ -65,6 +66,19 @@ class MainViewModel @Inject constructor(
     fun notibarOption(value: Boolean){
         CoroutineScope(Dispatchers.IO).launch {
             dsRepo.saveDisableNotificationBar(value)
+        }
+    }
+
+
+    val temp = test()
+    fun test(){
+        viewModelScope.launch {
+            notifications.run{
+                soundTest()
+            }
+        }
+        viewModelScope.launch {
+            notifications.notiBarTest()
         }
     }
 }
