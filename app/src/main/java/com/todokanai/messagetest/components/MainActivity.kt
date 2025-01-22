@@ -2,14 +2,18 @@ package com.todokanai.messagetest.components
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import com.todokanai.messagetest.adapters.SpinnerListener
+import com.todokanai.messagetest.compose.MainScreen
 import com.todokanai.messagetest.databinding.ActivityMainBinding
 import com.todokanai.messagetest.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -52,5 +56,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
         setContentView(binding.root)
+    }
+}
+
+ */
+
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    private val viewModel : MainViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent{
+            MainScreen()
+        }
     }
 }
