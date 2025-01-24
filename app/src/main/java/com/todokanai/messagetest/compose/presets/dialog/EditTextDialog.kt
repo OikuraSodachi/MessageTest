@@ -15,13 +15,13 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun EditTextDialog(
-    modifier: Modifier,
     title: String,
     defaultText:String,
-    cancelText:String = "Cancel",
-    confirmText:String = "Confirm",
     onConfirm: (String) -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit,
+    modifier: Modifier = Modifier,
+    cancelText:String = "Cancel",
+    confirmText:String = "Confirm"
 ) {
     var text by remember { mutableStateOf("") }
     AlertDialog(

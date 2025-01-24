@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.todokanai.messagetest.adapters.SpinnerListener
 import com.todokanai.messagetest.compose.MainScreen
 import com.todokanai.messagetest.databinding.ActivityMainBinding
@@ -69,7 +70,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent{
-            MainScreen()
+            val messageString = viewModel.receivedText.collectAsStateWithLifecycle()
+            MainScreen(
+                message = messageString.value,
+                soundOption = viewModel.disableSoundOption.map{it.toString()},
+                notiBarOption = viewModel.disableNotibarOption.map{it.toString()}
+            )
         }
     }
 }

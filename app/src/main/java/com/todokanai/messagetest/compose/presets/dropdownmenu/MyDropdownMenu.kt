@@ -1,6 +1,5 @@
 package com.todokanai.messagetest.compose.presets.dropdownmenu
 
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
@@ -10,14 +9,14 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MyDropdownMenu(
-    modifier:Modifier = Modifier,
     contents:List<Pair<String,()->Unit>>,
     expanded : Boolean,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    modifier:Modifier = Modifier
 ) {
 
     DropdownMenu(
-        modifier = modifier.wrapContentSize(),
+        modifier = modifier,
         expanded = expanded,
         onDismissRequest = { onDismissRequest() }
     ) {
@@ -30,7 +29,6 @@ fun MyDropdownMenu(
     }
 }
 
-
 @Preview
 @Composable
 private fun DropdownMenuPreview(){
@@ -40,4 +38,3 @@ private fun DropdownMenuPreview(){
         onDismissRequest = {}
     )
 }
-
