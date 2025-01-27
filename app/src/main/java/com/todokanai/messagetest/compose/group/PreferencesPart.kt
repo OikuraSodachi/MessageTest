@@ -1,12 +1,13 @@
 package com.todokanai.messagetest.compose.group
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.todokanai.messagetest.compose.presets.dropdownmenu.MyExposedDropdownMenu
@@ -19,7 +20,7 @@ fun PreferencesPart(
 ){
     Column(
         modifier
-            .wrapContentWidth()
+            .background(Color.Red)
     ) {
         MyExposedDropdownMenu(
             modifier = Modifier,
@@ -40,7 +41,6 @@ fun PreferencesPart(
             modifier = Modifier
                 .height(20.dp)
         )
-
     }
 }
 
@@ -52,7 +52,6 @@ private fun PreferencesPartPreview(){
             soundOptions = listOf("1"),
             notiBarOptions = listOf("1"),
             modifier = Modifier
-                .wrapContentWidth()
         )
     }
 }
