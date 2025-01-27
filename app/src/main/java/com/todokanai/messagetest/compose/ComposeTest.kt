@@ -37,7 +37,8 @@ fun MainScreen(
         ) {
             PreferencesPart(
                 soundOption,
-                notiBarOption
+                notiBarOption,
+                modifier = Modifier
             )
         }
     }
