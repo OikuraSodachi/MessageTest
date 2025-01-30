@@ -19,8 +19,7 @@ fun PreferencesPart(
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier
-            .background(Color.Red)
+        modifier = modifier
     ) {
         MyExposedDropdownMenu(
             modifier = Modifier,
@@ -52,6 +51,7 @@ private fun PreferencesPartPreview(){
             soundOptions = listOf("1"),
             notiBarOptions = listOf("1"),
             modifier = Modifier
+                .background(Color.Red)
         )
     }
 }
