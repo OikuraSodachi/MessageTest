@@ -2,6 +2,7 @@ package com.todokanai.messagetest.compose.group
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
@@ -20,15 +21,19 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MessagePart(
     message:String,
-    sendButton:(String)->Unit
+    sendButton:(String)->Unit,
+    modifier: Modifier = Modifier
 ){
     Column(
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         var text by rememberSaveable { mutableStateOf("Text") }
         TextField(
-            modifier = Modifier,
+            modifier = Modifier
+                .fillMaxWidth()
+            ,
             value = text,
             onValueChange = {
                 text = it

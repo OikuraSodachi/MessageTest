@@ -1,11 +1,11 @@
 package com.todokanai.messagetest.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.todokanai.messagetest.compose.group.MessagePart
 import com.todokanai.messagetest.compose.group.PreferencesPart
@@ -14,15 +14,15 @@ import com.todokanai.messagetest.compose.group.PreferencesPart
 fun MainScreen(
     message:String,
     soundOption:List<String>,
-    notiBarOption:List<String>
+    notiBarOption:List<String>,
+    setSoundOption:(Boolean)->Unit,
+    setNotiOption:(Boolean)->Unit,
+    modifier: Modifier = Modifier
 ){
-
-    val temp = Modifier
-        .wrapContentSize()
-
     Column(
-        modifier = temp,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color.Blue)
     ) {
         MessagePart(
             message = message,
@@ -31,7 +31,9 @@ fun MainScreen(
 
         PreferencesPart(
             soundOption,
-            notiBarOption
+            notiBarOption,
+            {setSoundOption(it)},
+            {setNotiOption(it)}
         )
     }
 }
@@ -39,11 +41,13 @@ fun MainScreen(
 @Preview
 @Composable
 private fun MainScreenPreview(){
-    Surface(){
-        MainScreen(
-            message = "test1",
-            listOf("1","2"),
-            listOf("1","2")
-        )
-    }
+    MainScreen(
+        message = "test1",
+        listOf("true","false"),
+        listOf("1","2"),
+        {},
+        {},
+        modifier = Modifier
+            .background(Color.Blue)
+    )
 }

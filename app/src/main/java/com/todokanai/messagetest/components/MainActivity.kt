@@ -71,8 +71,10 @@ class MainActivity : ComponentActivity() {
             val messageString = viewModel.receivedText.collectAsStateWithLifecycle()
             MainScreen(
                 message = messageString.value,
-                soundOption = viewModel.disableSoundOption.map{it.toString()},
-                notiBarOption = viewModel.disableNotibarOption.map{it.toString()}
+                soundOption = viewModel.disableSoundOption.map { it.toString() },
+                notiBarOption = viewModel.disableNotibarOption.map{it.toString()},
+                setSoundOption = {viewModel.soundOption(it)},
+                setNotiOption = {viewModel.notibarOption(it)}
             )
         }
     }

@@ -36,11 +36,13 @@ fun MyExposedDropdownMenu(
             onValueChange = {},
             readOnly = true,
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            modifier = Modifier.menuAnchor()
+            modifier = modifier
+                .menuAnchor()
         )
         ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
+            modifier = modifier
         ) {
             contents.forEach { item ->
                 DropdownMenuItem(
@@ -49,7 +51,8 @@ fun MyExposedDropdownMenu(
                         selectedText = item
                         expanded = false
                         onItemSelect(item)
-                    }
+                    },
+                    modifier = modifier
                 )
             }
         }

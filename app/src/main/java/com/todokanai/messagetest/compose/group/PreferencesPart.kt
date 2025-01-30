@@ -3,9 +3,11 @@ package com.todokanai.messagetest.compose.group
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,15 +18,19 @@ import com.todokanai.messagetest.compose.presets.dropdownmenu.MyExposedDropdownM
 fun PreferencesPart(
     soundOptions:List<String>,
     notiBarOptions:List<String>,
+    setSoundOption:(Boolean)->Unit,
+    setNotiOption:(Boolean)->Unit,
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier = modifier
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         MyExposedDropdownMenu(
-            modifier = Modifier,
-            contents = soundOptions,
-            onItemSelect = {}
+            modifier = Modifier
+                .fillMaxWidth(),
+            contents = soundOptions.map { it.toString() },
+            onItemSelect = {setSoundOption(it=="true")}
         )
         Spacer(
             modifier = Modifier
@@ -32,7 +38,8 @@ fun PreferencesPart(
         )
 
         MyExposedDropdownMenu(
-            modifier = Modifier,
+            modifier = Modifier
+                .fillMaxWidth(),
             contents = notiBarOptions,
             onItemSelect = {}
         )
@@ -48,8 +55,10 @@ fun PreferencesPart(
 private fun PreferencesPartPreview(){
     Surface {
         PreferencesPart(
-            soundOptions = listOf("1"),
+            soundOptions = listOf("true"),
             notiBarOptions = listOf("1"),
+            setSoundOption = {},
+            setNotiOption = {},
             modifier = Modifier
                 .background(Color.Red)
         )
