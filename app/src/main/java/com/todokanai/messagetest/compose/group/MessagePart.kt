@@ -2,7 +2,6 @@ package com.todokanai.messagetest.compose.group
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
@@ -31,9 +30,7 @@ fun MessagePart(
 
         var text by rememberSaveable { mutableStateOf("Text") }
         TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-            ,
+            modifier = modifier,
             value = text,
             onValueChange = {
                 text = it

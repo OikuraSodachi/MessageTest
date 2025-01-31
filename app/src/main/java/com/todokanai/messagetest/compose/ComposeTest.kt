@@ -1,11 +1,11 @@
 package com.todokanai.messagetest.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.todokanai.messagetest.compose.group.MessagePart
 import com.todokanai.messagetest.compose.group.PreferencesPart
@@ -26,11 +26,13 @@ fun MainScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Blue)
+            .wrapContentSize()
     ) {
         MessagePart(
             message = message,
-            sendButton = {}
+            sendButton = {},
+            modifier = Modifier
+                .fillMaxWidth()
         )
 
         PreferencesPart(
@@ -39,7 +41,9 @@ fun MainScreen(
             {setSoundOption(it)},
             {setNotiOption(it)},
             sound = sound,
-            noti = noti
+            noti = noti,
+            modifier = Modifier
+                .fillMaxWidth()
         )
     }
 }
@@ -56,6 +60,5 @@ private fun MainScreenPreview(){
         emptyFlow(),
         emptyFlow(),
         modifier = Modifier
-            .background(Color.Blue)
     )
 }

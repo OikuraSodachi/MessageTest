@@ -2,15 +2,16 @@ package com.todokanai.messagetest.compose.group
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.todokanai.messagetest.compose.presets.dropdownmenu.MyExposedDropdownMenu
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun PreferencesPart(
@@ -30,8 +31,7 @@ fun PreferencesPart(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         MyExposedDropdownMenu(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = modifier,
             contents = soundOptions,
             onItemSelect = {setSoundOption(it)},
             selected = selectedTest.value
@@ -42,8 +42,7 @@ fun PreferencesPart(
         )
 
         MyExposedDropdownMenu(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = modifier,
             contents = notiBarOptions,
             onItemSelect = {setNotiOption(it)},
             selected = notiTest.value
@@ -53,4 +52,17 @@ fun PreferencesPart(
                 .height(20.dp)
         )
     }
+}
+
+@Preview
+@Composable
+private fun PreferencesPartPreview(){
+    PreferencesPart(
+        soundOptions = listOf("1"),
+        notiBarOptions = listOf("1"),
+        setSoundOption = {},
+        setNotiOption = {},
+        sound = emptyFlow(),
+        noti = emptyFlow()
+    )
 }
