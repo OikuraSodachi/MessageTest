@@ -59,3 +59,4 @@ firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-k
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 
+[plugins]
