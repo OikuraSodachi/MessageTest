@@ -73,8 +73,10 @@ class MainActivity : ComponentActivity() {
                 message = messageString.value,
                 soundOption = viewModel.disableSoundOption.map { it.toString() },
                 notiBarOption = viewModel.disableNotibarOption.map{it.toString()},
-                setSoundOption = {viewModel.soundOption(it)},
-                setNotiOption = {viewModel.notibarOption(it)}
+                setSoundOption = {viewModel.soundOption(it=="true")},
+                setNotiOption = {viewModel.notibarOption(it=="true")},
+                sound = viewModel.soundOption,
+                noti = viewModel.notiOption
             )
         }
     }

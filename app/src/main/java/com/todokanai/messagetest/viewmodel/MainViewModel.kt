@@ -16,6 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -56,6 +57,14 @@ class MainViewModel @Inject constructor(
 
     val disableSoundOption = listOf(true,false)
     val disableNotibarOption =listOf(true,false)
+
+    val soundOption = dsRepo.disableSoundFlow.map {
+        it.toString()
+    }
+
+    val notiOption = dsRepo.disableNotificationBarFlow.map{
+        it.toString()
+    }
 
     fun soundOption(value:Boolean){
         CoroutineScope(Dispatchers.IO).launch {

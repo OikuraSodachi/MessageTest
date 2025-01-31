@@ -70,17 +70,13 @@ class Notifications(
 
     suspend fun notiBarTest(){
         dsRepo.disableNotificationBarFlow.collect{
-            it?.let{
-                disableNotificationBar(it)
-            }
+            disableNotificationBar(it)
         }
     }
 
     suspend fun soundTest(){
         dsRepo.disableSoundFlow.collect {
-            it?.let {
-                disableSound(it)
-            }
+            disableSound(it)
         }
     }
 

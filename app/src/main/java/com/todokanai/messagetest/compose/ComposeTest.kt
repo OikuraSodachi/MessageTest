@@ -9,14 +9,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.todokanai.messagetest.compose.group.MessagePart
 import com.todokanai.messagetest.compose.group.PreferencesPart
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun MainScreen(
     message:String,
     soundOption:List<String>,
     notiBarOption:List<String>,
-    setSoundOption:(Boolean)->Unit,
-    setNotiOption:(Boolean)->Unit,
+    setSoundOption:(String)->Unit,
+    setNotiOption:(String)->Unit,
+    sound: Flow<String>,
+    noti:Flow<String>,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -33,7 +37,9 @@ fun MainScreen(
             soundOption,
             notiBarOption,
             {setSoundOption(it)},
-            {setNotiOption(it)}
+            {setNotiOption(it)},
+            sound = sound,
+            noti = noti
         )
     }
 }
@@ -47,6 +53,8 @@ private fun MainScreenPreview(){
         listOf("1","2"),
         {},
         {},
+        emptyFlow(),
+        emptyFlow(),
         modifier = Modifier
             .background(Color.Blue)
     )
