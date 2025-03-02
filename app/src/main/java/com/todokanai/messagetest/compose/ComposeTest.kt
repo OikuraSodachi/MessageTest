@@ -21,6 +21,7 @@ fun MainScreen(
     setNotiOption:(String)->Unit,
     sound: Flow<String>,
     noti:Flow<String>,
+    onSend:(String)->Unit,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -30,7 +31,7 @@ fun MainScreen(
     ) {
         MessagePart(
             message = message,
-            sendButton = {},
+            sendButton = {onSend(it)},
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -59,6 +60,7 @@ private fun MainScreenPreview(){
         {},
         emptyFlow(),
         emptyFlow(),
+        {},
         modifier = Modifier
     )
 }

@@ -25,6 +25,8 @@ picasso = "2.8"
 recyclerviewSelection = "1.1.0"
 roomVersion = "2.6.1"
 ui = "1.6.8"
+kotlin = "1.8.10"
+firebaseMessagingKtx = "24.1.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -58,5 +60,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-ktx", version.ref = "firebaseCommonKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 
 [plugins]
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

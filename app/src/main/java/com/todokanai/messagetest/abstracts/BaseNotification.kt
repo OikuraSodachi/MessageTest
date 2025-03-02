@@ -60,13 +60,17 @@ abstract class BaseNotification() {
     abstract fun appIcon():Int
 
     abstract fun postNotification(
+        context: Context,
         title:String,
-        contentText:String,
-        )
+        contentText:String
+    )
 
-    abstract fun builder():NotificationCompat.Builder
+    abstract fun builder(context: Context):NotificationCompat.Builder
 
     abstract fun disableSound(value:Boolean)
 
     abstract fun disableNotificationBar(value: Boolean)
+
+    abstract fun createNotificationChannel()
+
 }

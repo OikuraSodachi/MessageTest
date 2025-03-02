@@ -2,12 +2,12 @@ package com.todokanai.messagetest.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.todokanai.messagetest.Constants
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.abstracts.BaseNotification
-import com.todokanai.messagetest.di.MyApplication.Companion.appContext
 import com.todokanai.messagetest.repository.DataStoreRepository
 
 class Notifications(
@@ -42,30 +42,31 @@ class Notifications(
         private const val PRIVATE = NotificationCompat.VISIBILITY_PRIVATE
     }
 
-    val defaultChannel = NotificationChannel(
-        Constants.CHANNEL_ID,
-        Constants.NOTIFICATION_CHANNEL_NAME,
-        NotificationManager.IMPORTANCE_LOW
-    ).apply {
-        notificationManager.createNotificationChannel(this)
+    val notificationChannel by lazy {
+        NotificationChannel(
+            Constants.CHANNEL_ID,
+            Constants.NOTIFICATION_CHANNEL_NAME,
+            HIGH            //  알림의 중요도
+        )
     }
 
     override fun appIcon(): Int {
         return R.drawable.ic_launcher_foreground
     }
 
-    override fun postNotification(title: String, contentText: String) {
-        val temp =builder()
+    override fun postNotification(context: Context,title: String, contentText: String) {
+        println("postNotification")
+        val temp = builder(context)
             .setContentTitle(title)
             .setContentText(contentText)
-            .setSmallIcon(appIcon())
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setVisibility(PUBLIC)
             .build()
         notificationManager.notify(1,temp)
     }
 
-    override fun builder(): NotificationCompat.Builder {
-        return NotificationCompat.Builder(appContext,defaultChannel.id)
+    override fun builder(context: Context): NotificationCompat.Builder {
+        return NotificationCompat.Builder(context,notificationChannel.id)
     }
 
     suspend fun notiBarTest(){
@@ -86,5 +87,10 @@ class Notifications(
 
     override fun disableSound(value: Boolean) {
         println("disableSound: $value")
+    }
+
+    override fun createNotificationChannel() {
+        notificationManager.createNotificationChannel(notificationChannel)
+
     }
 }

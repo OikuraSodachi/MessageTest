@@ -1,5 +1,6 @@
 package com.todokanai.messagetest.di
 
+import android.app.NotificationManager
 import androidx.core.app.NotificationManagerCompat
 import com.todokanai.messagetest.notifications.Notifications
 import com.todokanai.messagetest.repository.DataStoreRepository
@@ -15,7 +16,12 @@ class Etc {
 
     @Singleton
     @Provides
-    fun provideNotifications(notificationManager: NotificationManagerCompat,dataStoreRepository: DataStoreRepository): Notifications {
-        return Notifications(notificationManager,dataStoreRepository)
+    fun provideNotifications(
+        notificationManager: NotificationManagerCompat,
+        dataStoreRepository: DataStoreRepository
+    ): Notifications {
+        return Notifications(notificationManager,dataStoreRepository).apply {
+            createNotificationChannel()
+        }
     }
 }

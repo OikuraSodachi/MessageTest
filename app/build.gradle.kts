@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.firebase.database.ktx)
 
     implementation (platform(libs.androidx.compose.bom))
+    implementation(libs.firebase.messaging.ktx)
     testImplementation (platform(libs.androidx.compose.bom))
 
     implementation (libs.androidx.core.ktx.v190)

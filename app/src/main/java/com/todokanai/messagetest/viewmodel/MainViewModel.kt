@@ -1,6 +1,8 @@
 package com.todokanai.messagetest.viewmodel
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,36 +29,42 @@ class MainViewModel @Inject constructor(
     private val dsRepo:DataStoreRepository
 ):ViewModel() {
 
-    private val myRef = firebase.getReference(appContext.getString(R.string.firebase_ref))
+    val myRef = firebase.getReference(appContext.getString(R.string.firebase_ref))
 
     private val _receivedText = MutableStateFlow("no text")
     val receivedText : StateFlow<String>
         get() = _receivedText
 
-    fun sendBtn(value: String) {
+    fun sendBtn(context: Context, value: String) {
         myRef.setValue(value)
+        notifications.postNotification(context,"sendBtn",value)
     }
+
 
     fun addValueListener(){
         myRef.addValueEventListener(
             TestListener(
                 callback = {
-                    _receivedText.value = it.value.toString()
+                    val result = it.value.toString()
+                    println("addValueListener: $result")
+                    _receivedText.value = result
                 }
             )
         )
     }
 
-    fun notiTest(value:String){
-        notifications.postNotification(title = "Title",value)
+
+    fun notiTest(context: Context,value:String){
+        notifications.postNotification(context = context, title = "Title",value)
     }
 
-    fun permission(activity: AppCompatActivity){
+    fun permission(activity: Activity){
         requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
     }
 
     val disableSoundOption = listOf(true,false)
     val disableNotibarOption =listOf(true,false)
+
 
     val soundOption = dsRepo.disableSoundFlow.map {
         it.toString()
