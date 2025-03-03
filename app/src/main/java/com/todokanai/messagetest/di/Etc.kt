@@ -1,7 +1,6 @@
 package com.todokanai.messagetest.di
 
 import android.app.NotificationManager
-import com.todokanai.messagetest.Constants
 import com.todokanai.messagetest.notifications.Notifications
 import com.todokanai.messagetest.notifications.NotificationsNew
 import com.todokanai.messagetest.repository.DataStoreRepository
