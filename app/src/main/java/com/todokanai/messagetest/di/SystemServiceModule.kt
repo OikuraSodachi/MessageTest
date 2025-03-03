@@ -1,7 +1,7 @@
 package com.todokanai.messagetest.di
 
+import android.app.NotificationManager
 import android.content.Context
-import androidx.core.app.NotificationManagerCompat
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,9 +13,9 @@ import javax.inject.Singleton
 @Module
 class SystemServiceModule {
 
-    @Singleton
     @Provides
-    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat {
-        return NotificationManagerCompat.from(context)
+    @Singleton
+    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManager {
+        return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 }

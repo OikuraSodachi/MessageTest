@@ -20,6 +20,8 @@ class MainActivity : ComponentActivity() {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) // Todo: Release build 에서는 제거할 것
         viewModel.addValueListener()
+      //  viewModel.createChannel()
+       // viewModel.createNotificationChannel("1","2")
         setContent{
             val messageString = viewModel.receivedText.collectAsStateWithLifecycle()
             MainScreen(

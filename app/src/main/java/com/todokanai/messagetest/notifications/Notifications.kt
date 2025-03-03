@@ -1,17 +1,17 @@
 package com.todokanai.messagetest.notifications
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.todokanai.messagetest.Constants
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.abstracts.BaseNotification
 import com.todokanai.messagetest.repository.DataStoreRepository
 
 class Notifications(
-    val notificationManager:NotificationManagerCompat,
+    val notificationManager:NotificationManager,
     val dsRepo:DataStoreRepository
 ): BaseNotification() {
 
@@ -42,6 +42,7 @@ class Notifications(
         private const val PRIVATE = NotificationCompat.VISIBILITY_PRIVATE
     }
 
+    private val channelId : Int = 2
     val notificationChannel by lazy {
         NotificationChannel(
             Constants.CHANNEL_ID,
@@ -56,17 +57,12 @@ class Notifications(
 
     override fun postNotification(context: Context,title: String, contentText: String) {
         println("postNotification")
-        val temp = builder(context)
+        val temp = Notification.Builder(context)
             .setContentTitle(title)
             .setContentText(contentText)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setVisibility(PUBLIC)
+            .setSmallIcon(appIcon())
             .build()
-        notificationManager.notify(1,temp)
-    }
-
-    override fun builder(context: Context): NotificationCompat.Builder {
-        return NotificationCompat.Builder(context,notificationChannel.id)
+        notificationManager.notify(channelId,temp)
     }
 
     suspend fun notiBarTest(){
@@ -74,7 +70,6 @@ class Notifications(
             disableNotificationBar(it)
         }
     }
-
     suspend fun soundTest(){
         dsRepo.disableSoundFlow.collect {
             disableSound(it)
@@ -91,6 +86,5 @@ class Notifications(
 
     override fun createNotificationChannel() {
         notificationManager.createNotificationChannel(notificationChannel)
-
     }
 }

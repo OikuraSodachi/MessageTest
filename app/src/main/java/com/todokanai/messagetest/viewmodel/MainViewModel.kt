@@ -3,14 +3,13 @@ package com.todokanai.messagetest.viewmodel
 import android.Manifest
 import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.FirebaseDatabase
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
 import com.todokanai.messagetest.notifications.Notifications
+import com.todokanai.messagetest.notifications.NotificationsNew
 import com.todokanai.messagetest.repository.DataStoreRepository
 import com.todokanai.messagetest.requestPermission_td
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +25,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     firebase:FirebaseDatabase,
     private val notifications: Notifications,
-    private val dsRepo:DataStoreRepository
+    private val dsRepo:DataStoreRepository,
+    private val notiTest:NotificationsNew
 ):ViewModel() {
 
     val myRef = firebase.getReference(appContext.getString(R.string.firebase_ref))
@@ -37,9 +37,11 @@ class MainViewModel @Inject constructor(
 
     fun sendBtn(context: Context, value: String) {
         myRef.setValue(value)
-        notifications.postNotification(context,"sendBtn",value)
+        notiTest.displayNotification(
+            title = value,
+            contentText = value
+        )
     }
-
 
     fun addValueListener(){
         myRef.addValueEventListener(
@@ -53,11 +55,9 @@ class MainViewModel @Inject constructor(
         )
     }
 
-
     fun notiTest(context: Context,value:String){
         notifications.postNotification(context = context, title = "Title",value)
     }
-
     fun permission(activity: Activity){
         requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
     }
@@ -65,14 +65,8 @@ class MainViewModel @Inject constructor(
     val disableSoundOption = listOf(true,false)
     val disableNotibarOption =listOf(true,false)
 
-
-    val soundOption = dsRepo.disableSoundFlow.map {
-        it.toString()
-    }
-
-    val notiOption = dsRepo.disableNotificationBarFlow.map{
-        it.toString()
-    }
+    val soundOption = dsRepo.disableSoundFlow.map { it.toString() }
+    val notiOption = dsRepo.disableNotificationBarFlow.map{ it.toString() }
 
     fun soundOption(value:Boolean){
         CoroutineScope(Dispatchers.IO).launch {
@@ -85,17 +79,5 @@ class MainViewModel @Inject constructor(
             dsRepo.saveDisableNotificationBar(value)
         }
     }
-
-
-    val temp = test()
-    fun test(){
-        viewModelScope.launch {
-            notifications.run{
-                soundTest()
-            }
-        }
-        viewModelScope.launch {
-            notifications.notiBarTest()
-        }
-    }
+    //------------------
 }
