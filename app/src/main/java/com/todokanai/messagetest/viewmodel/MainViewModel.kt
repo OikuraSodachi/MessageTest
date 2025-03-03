@@ -38,6 +38,7 @@ class MainViewModel @Inject constructor(
     fun sendBtn(context: Context, value: String) {
         myRef.setValue(value)
         notiTest.displayNotification(
+            context = context,
             title = value,
             contentText = value
         )

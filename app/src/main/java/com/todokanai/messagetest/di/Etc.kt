@@ -30,7 +30,7 @@ class Etc {
     @Singleton
     fun provideNotificationsNew(notificationManager: NotificationManager):NotificationsNew{
         return NotificationsNew(notificationManager).apply {
-            createNotificationChannel(Constants.NOTIFICATION_CHANNEL_NAME)
+            createNotificationChannel("category")
         }
     }
 }
