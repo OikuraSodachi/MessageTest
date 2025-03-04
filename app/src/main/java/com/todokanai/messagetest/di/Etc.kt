@@ -16,7 +16,7 @@ class Etc {
     @Singleton
     fun provideNotificationsNew(notificationManager: NotificationManager):NotificationsNew{
         return NotificationsNew(notificationManager).apply {
-            createNotificationChannel("category")
+            createNotificationChannel()
         }
     }
 }

@@ -12,6 +12,8 @@ class NotificationsNew(
 ){
     private val channelId = Constants.NOTIFICATION_CHANNEL_NAME
 
+    private val channelTest = NotificationChannel(channelId,Constants.NOTIFICATION_CHANNEL_NAME,Constants.CHANNEL_IMPORTANCE)
+
     fun displayNotification(context: Context, title:String, contentText:String, notificationId:Int = 45) {
         val notification = Notification.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -22,10 +24,7 @@ class NotificationsNew(
         notificationManager.notify(notificationId, notification)
     }
 
-    fun createNotificationChannel(description: String) {
-        val importance = NotificationManager.IMPORTANCE_DEFAULT // set importance
-        val channel = NotificationChannel(channelId , description, importance)
-        // Register the channel with the system
-        notificationManager.createNotificationChannel(channel)
+    fun createNotificationChannel() {
+        notificationManager.createNotificationChannel(channelTest)
     }
 }
