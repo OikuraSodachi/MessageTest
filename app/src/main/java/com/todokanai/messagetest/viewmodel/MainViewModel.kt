@@ -8,7 +8,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
-import com.todokanai.messagetest.notifications.Notifications
 import com.todokanai.messagetest.notifications.NotificationsNew
 import com.todokanai.messagetest.repository.DataStoreRepository
 import com.todokanai.messagetest.requestPermission_td
@@ -24,7 +23,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     firebase:FirebaseDatabase,
-    private val notifications: Notifications,
     private val dsRepo:DataStoreRepository,
     private val notiTest:NotificationsNew
 ):ViewModel() {
@@ -57,7 +55,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun notiTest(context: Context,value:String){
-        notifications.postNotification(context = context, title = "Title",value)
+       // notifications.postNotification(context = context, title = "Title",value)
     }
     fun permission(activity: Activity){
         requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
