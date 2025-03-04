@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.TestListener
 import com.todokanai.messagetest.di.MyApplication.Companion.appContext
-import com.todokanai.messagetest.notifications.NotificationsNew
+import com.todokanai.messagetest.notifications.Notifications
 import com.todokanai.messagetest.repository.DataStoreRepository
 import com.todokanai.messagetest.requestPermission_td
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     firebase:FirebaseDatabase,
     private val dsRepo:DataStoreRepository,
-    private val notiTest:NotificationsNew
+    private val notifications:Notifications
 ):ViewModel() {
 
     val myRef = firebase.getReference(appContext.getString(R.string.firebase_ref))
@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(
 
     fun sendBtn(context: Context, value: String) {
         myRef.setValue(value)
-        notiTest.displayNotification(
+        notifications.displayNotification(
             context = context,
             title = value,
             contentText = value

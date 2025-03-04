@@ -2,7 +2,8 @@ package com.todokanai.messagetest.di
 
 import android.app.NotificationManager
 import com.todokanai.messagetest.Objects
-import com.todokanai.messagetest.notifications.NotificationsNew
+import com.todokanai.messagetest.R
+import com.todokanai.messagetest.notifications.Notifications
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +16,12 @@ class Etc {
 
     @Provides
     @Singleton
-    fun provideNotificationsNew(notificationManager: NotificationManager):NotificationsNew{
-        return NotificationsNew(notificationManager, Objects.testChannel).apply {
+    fun provideNotifications(notificationManager: NotificationManager):Notifications{
+        return Notifications(
+            notificationManager,
+            Objects.testChannel,
+            R.drawable.ic_launcher_foreground
+        ).apply {
             createNotificationChannel()
         }
     }
