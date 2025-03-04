@@ -6,7 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import androidx.annotation.DrawableRes
 
-class Notifications(
+open class Notifications(
     private val notificationManager: NotificationManager,
     private val channel: NotificationChannel,
     @DrawableRes private val smallIcon: Int
