@@ -35,11 +35,6 @@ class MainViewModel @Inject constructor(
 
     fun sendBtn(context: Context, value: String) {
         myRef.setValue(value)
-        notifications.displayNotification(
-            context = context,
-            title = value,
-            contentText = value
-        )
     }
 
     fun addValueListener(){
@@ -48,6 +43,11 @@ class MainViewModel @Inject constructor(
                 callback = {
                     val result = it.value.toString()
                     println("addValueListener: $result")
+                    notifications.displayNotification(
+                        appContext,
+                        "title",
+                        result
+                    )
                     _receivedText.value = result
                 }
             )

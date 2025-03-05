@@ -1,6 +1,7 @@
 package com.todokanai.messagetest.di
 
 import android.app.NotificationManager
+import com.google.firebase.messaging.FirebaseMessaging
 import com.todokanai.messagetest.Objects
 import com.todokanai.messagetest.R
 import com.todokanai.messagetest.notifications.Notifications
@@ -25,4 +26,9 @@ class Etc {
             createNotificationChannel()
         }
     }
+
+    @Provides
+    @Singleton
+    fun provideFCM():FirebaseMessaging = FirebaseMessaging.getInstance()
+
 }
