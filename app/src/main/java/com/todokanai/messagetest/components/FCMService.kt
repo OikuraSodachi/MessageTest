@@ -39,7 +39,12 @@ class FCMService : FirebaseMessagingService() {
         super.onMessageReceived(message)
         val content = message.data
         println("onMessageReceived: $content")
-        notification.displayNotification(this,"backgroundTest",content.toString())
+
+        notification.displayNotification(
+            context = this,
+            title = "backgroundTest",
+            contentText = content.toString()
+        )
     }
 
     override fun onDestroy() {

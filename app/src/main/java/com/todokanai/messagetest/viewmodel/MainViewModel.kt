@@ -35,10 +35,23 @@ class MainViewModel @Inject constructor(
 
     fun sendBtn(context: Context, value: String) {
         myRef.setValue(value)
+        sendMessage(value)
+    }
+
+    private val listener = TestListener {
+        val result = it.value.toString()
+        println("addValueListener: $result")
+        notifications.displayNotification(
+            appContext,
+            "title",
+            result
+        )
+        _receivedText.value = result
     }
 
     fun addValueListener(){
         myRef.addValueEventListener(
+            /*
             TestListener(
                 callback = {
                     val result = it.value.toString()
@@ -51,12 +64,13 @@ class MainViewModel @Inject constructor(
                     _receivedText.value = result
                 }
             )
+
+             */
+            listener
+
         )
     }
 
-    fun notiTest(context: Context,value:String){
-       // notifications.postNotification(context = context, title = "Title",value)
-    }
     fun permission(activity: Activity){
         requestPermission_td(activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS),{})
     }
@@ -79,4 +93,9 @@ class MainViewModel @Inject constructor(
         }
     }
     //------------------
+
+    /** FCM 메시지 부분 여기에 작성 **/
+    private fun sendMessage(message:String){
+
+    }
 }
